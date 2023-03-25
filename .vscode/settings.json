@@ -1,0 +1,4 @@
+{
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "files.autoSave": "onWindowChange"
+}
