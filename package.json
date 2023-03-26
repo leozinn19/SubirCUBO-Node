@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test.js echo \"Error: no test specified\" && exit 1",
     "dpsp": "node dpsp.js",
     "condor": "node condor.js",
     "bistek22": "node bistek22.js",
