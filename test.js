@@ -160,6 +160,7 @@ function getDia(headerK, headerK2) {
 }
 // MES
 function getMes(headerN) {
+  console.log(headerN);
   const column = XLSX.utils
     .sheet_to_json(ws1, { header: headerN })
     .map((row) => row[headerN].toUpperCase());
@@ -291,13 +292,14 @@ codLoja('Loja', '7');
 codProduto('EAN');
 refVarejista2('BISTEK');
 getDia('Mês', 'Ano');
-getMes('Mês');
+getMes('Mês' && 'Mes');
 descrMes('Mês');
 getAno('Ano');
 getPeriodo('Mês');
 valor('Venda valor');
 quantidade('Venda quantidade');
 concat('Mês', 'Ano');
+  
 
 XLSX.utils.book_append_sheet(wb2, ws2, 'MODELO');
 XLSX.writeFile(wb2, destino);

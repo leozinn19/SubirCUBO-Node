@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node test.js echo \"Error: no test specified\" && exit 1",
+    "test": "node test.js echo \"Tentando Bistek22\" && exit 1",
+    "test2": "node test2.js echo \"Tentando novo método de buscas de coluna\" && exit 1",
     "dpsp": "node dpsp.js",
     "condor": "node condor.js",
     "bistek22": "node bistek22.js",

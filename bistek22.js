@@ -167,7 +167,7 @@ rl.question('Informe a BASE a ser lida: ', (filePath) => {
     function getMes(headerN) {
       const column = XLSX.utils
         .sheet_to_json(ws1, { header: headerN })
-        .map((row) => row[headerN]);
+        .map((row) => row[headerN].toUpperCase());
       XLSX.utils.sheet_add_aoa(
         ws2,
         [['mes']].concat(column.map((value) => [value])),
@@ -178,24 +178,24 @@ rl.question('Informe a BASE a ser lida: ', (filePath) => {
     function descrMes(headerO) {
       const column = XLSX.utils
         .sheet_to_json(ws1, { header: headerO })
-        .map((row) => row[headerO]);
+        .map((row) => row[headerO].toUpperCase());
       XLSX.utils.sheet_add_aoa(
         ws2,
         [['decr_mes']].concat(
           column.map((value) => {
             let result = [value].toString();
-            if (result === 'jan') return ['01-JAN'];
-            else if (result === 'fev') return ['02-FEV'];
-            else if (result === 'mar') return ['03-MAR'];
-            else if (result === 'abr') return ['04-ABR'];
-            else if (result === 'mai') return ['05-MAI'];
-            else if (result === 'jun') return ['06-JUN'];
-            else if (result === 'jul') return ['07-JUL'];
-            else if (result === 'ago') return ['08-AGO'];
-            else if (result === 'set') return ['09-SET'];
-            else if (result === 'out') return ['10-OUT'];
-            else if (result === 'nov') return ['11-NOV'];
-            else if (result === 'dez') return ['12-DEZ'];
+            if (result === 'JAN') return ['01-JAN'];
+            else if (result === 'FEV') return ['02-FEV'];
+            else if (result === 'MAR') return ['03-MAR'];
+            else if (result === 'ABR') return ['04-ABR'];
+            else if (result === 'MAI') return ['05-MAI'];
+            else if (result === 'JUN') return ['06-JUN'];
+            else if (result === 'JUL') return ['07-JUL'];
+            else if (result === 'AGO') return ['08-AGO'];
+            else if (result === 'SET') return ['09-SET'];
+            else if (result === 'OUT') return ['10-OUT'];
+            else if (result === 'NOV') return ['11-NOV'];
+            else if (result === 'DEZ') return ['12-DEZ'];
           })
         ),
         { origin: 'N1' }
@@ -216,18 +216,18 @@ rl.question('Informe a BASE a ser lida: ', (filePath) => {
     function getPeriodo(headerR) {
       const column = XLSX.utils
         .sheet_to_json(ws1, { header: headerR })
-        .map((row) => row[headerR]);
+        .map((row) => row[headerR].toUpperCase());
       XLSX.utils.sheet_add_aoa(
         ws2,
         [['periodo']].concat(
           column.map((value) => {
             let result = [value].toString();
-            if (result === 'jan' || result === 'fev') return ['1 BIM'];
-            else if (result === 'mar' || result === 'abr') return ['2 BIM'];
-            else if (result === 'mai' || result === 'jun') return ['3 BIM'];
-            else if (result === 'jul' || result === 'ago') return ['4 BIM'];
-            else if (result === 'set' || result === 'out') return ['5 BIM'];
-            else if (result === 'nov' || result === 'dez') return ['6 BIM'];
+            if (result === 'JAN' || result === 'FEV') return ['1 BIM'];
+            else if (result === 'MAR' || result === 'ABR') return ['2 BIM'];
+            else if (result === 'MAI' || result === 'JUN') return ['3 BIM'];
+            else if (result === 'JUL' || result === 'AGO') return ['4 BIM'];
+            else if (result === 'SET' || result === 'OUT') return ['5 BIM'];
+            else if (result === 'NOV' || result === 'DEZ') return ['6 BIM'];
           })
         ),
         { origin: 'Q1' }
@@ -269,7 +269,7 @@ rl.question('Informe a BASE a ser lida: ', (filePath) => {
     function concat(headerX, headerX2) {
       const column = XLSX.utils
         .sheet_to_json(ws1, { header: headerX })
-        .map((row) => row[headerX]);
+        .map((row) => row[headerX].toUpperCase());
       const column2 = XLSX.utils
         .sheet_to_json(ws1, { header: headerX2 })
         .map((row) => row[headerX2]);
