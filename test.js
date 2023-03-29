@@ -174,7 +174,7 @@ function getMes(headerN) {
 function descrMes(headerO) {
   const column = XLSX.utils
     .sheet_to_json(ws1, { header: headerO })
-    .map((row) => row[headerO].toUpperCase());
+    .map((row) => row['Coluna2'].toUpperCase());
   XLSX.utils.sheet_add_aoa(
     ws2,
     [['decr_mes']].concat(
