@@ -26,18 +26,26 @@ fs.watch(folderPath, (eventType, fileName) => {
 
         // BUSCA VELOR DE CÉLUNAS
         for (let c = range.s.c; c <= range.e.c; c++) {
-          const cellAddress = XLSX.utils.encode_cell({ r: 0, c });
+          const cellAddress = XLSX.utils.encode_cell({ r: 1, c });
           const cell = ws1[cellAddress];
           if (cell) {
             const cellValue = cell.v.toString().toLocaleUpperCase();
             const cellPosition = XLSX.utils.decode_cell(cellAddress);
-            if (cellValue === 'MÊS' || cellValue === 'MES') {
+            if (
+              cellValue === 'MÊS' ||
+              cellValue === 'MES' ||
+              cellValue === 'MÊS VENDA'
+            ) {
               headerMes = cellPosition.c;
-            } else if (cellValue === 'ANO') {
+            } else if (cellValue === 'ANO' || cellValue === 'MÊS VENDA') {
               headerAno = cellPosition.c;
             } else if (cellValue === 'EAN') {
               headerEAN = cellPosition.c;
-            } else if (cellValue === 'LOJA' || cellValue === 'SITE') {
+            } else if (
+              cellValue === 'LOJA' ||
+              cellValue === 'SITE' ||
+              cellValue === 'CÓDIGO EMPRESA'
+            ) {
               headerLoja = cellPosition.c;
             } else if (
               cellValue === 'VENDA VALOR' ||
@@ -48,6 +56,7 @@ fs.watch(folderPath, (eventType, fileName) => {
             } else if (
               cellValue === 'VENDA QUANTIDADE' ||
               cellValue === 'VENDA QTDE' ||
+              cellValue === 'VENDA QTD.' ||
               cellValue === 'QUANTIDADE'
             ) {
               headerQtd = cellPosition.c;
@@ -87,12 +96,19 @@ fs.watch(folderPath, (eventType, fileName) => {
         }
         // RED ID_LOJA
         function refIdLoja(headerLoja) {
+          function justNumbers(text) {
+            var numbers = text.replace(/[^0-9]/g, '');
+            return parseInt(numbers);
+          }
           const column = XLSX.utils
             .sheet_to_json(ws1, { header: 1 })
             .map((row) => row[headerLoja]);
           XLSX.utils.sheet_add_aoa(
             ws2,
-            column.map((value) => [value]),
+            column.map((value) => {
+              let result = justNumbers([value].toString());
+              return [result * 1];
+            }),
             { origin: 'C1' }
           );
         }
@@ -139,10 +155,7 @@ fs.watch(folderPath, (eventType, fileName) => {
             .map((row) => row[headerLoja]);
           XLSX.utils.sheet_add_aoa(
             ws2,
-            column.map((value) => {
-              let result = ref + '10' + value;
-              return [result * 1];
-            }),
+            column.map((value) => [value]),
             { origin: 'H1' }
           );
         }
@@ -208,7 +221,10 @@ fs.watch(folderPath, (eventType, fileName) => {
             .map((row) => row[headerMes].toUpperCase());
           XLSX.utils.sheet_add_aoa(
             ws2,
-            column.map((value) => [value]),
+            column.map((value) => {
+              result = [value].slice(2);
+              return [result];
+            }),
             {
               origin: 'M1',
             }
@@ -330,9 +346,9 @@ fs.watch(folderPath, (eventType, fileName) => {
         concat(headerMes, headerAno);
 
         // FUNÇÔES QUE PRECISAM SER COMPLETAS DE ACORDO COM O CLIENTE:
-        refVarejista('BISTEK');
-        refVarejista2('BISTEK');
-        codLoja(headerLoja, '7');
+        refVarejista('SAVEGNAGO');
+        refVarejista2('SAVEGNAGO');
+        codLoja(headerLoja, '6');
 
         // SALVA ARQUIVO DESTINO
         XLSX.utils.book_append_sheet(wb2, ws2, 'MODELO');

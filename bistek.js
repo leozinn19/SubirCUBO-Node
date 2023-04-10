@@ -1,4 +1,5 @@
 import XLSX from 'xlsx';
+import chokidar from 'chokidar';
 import fs from 'fs';
 import path from 'path';
 
@@ -154,7 +155,10 @@ fs.watch(folderPath, (eventType, fileName) => {
           //console.log(column);
           XLSX.utils.sheet_add_aoa(
             ws2,
-            column.map((value) => [value]),
+            column.map((value) => {
+              let result = [value].toString().slice(0);
+              return [result * 1];
+            }),
             { origin: 'I1' }
           );
         }
